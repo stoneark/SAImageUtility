@@ -29,12 +29,17 @@
 
 @implementation SAImageUtility
 
-+ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset
++ (UIImage*)ellipseImage:(UIImage*)image
 {
-    return [self ellipseImage:image withInset:inset withBorderWidth:0 withBorderColor:[UIColor clearColor]];
+    return [self ellipseImage:image withInset:0];
 }
 
-+ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset withBorderWidth:(CGFloat)width withBorderColor:(UIColor*)color
++ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset
+{
+    return [self ellipseImage:image withInset:inset borderWidth:0 borderColor:[UIColor clearColor]];
+}
+
++ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset borderWidth:(CGFloat)width borderColor:(UIColor*)color
 {
     UIGraphicsBeginImageContext(image.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -62,9 +67,9 @@
 {
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *imgResized = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *imgScaled = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return imgResized;
+    return imgScaled;
 }
 
 + (UIImage*)scaleImage:(UIImage*)image toExactPixelSize:(CGSize)size
@@ -92,9 +97,9 @@
 {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawAtPoint:CGPointMake((newSize.width-image.size.width)/2, (newSize.height-image.size.height)/2)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *imgReCanvas = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return newImage;
+    return imgReCanvas;
 }
 
 + (UIImage*)imageWithView:(UIView *)view

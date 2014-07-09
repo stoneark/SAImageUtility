@@ -29,11 +29,14 @@
 
 @interface SAImageUtility : NSObject
 
+// Ellipse the image with no inset, no border.
++ (UIImage*)ellipseImage:(UIImage*)image;
+
 // Ellipse the image with no border.
 + (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset;
 
-// Ellipse the image with border.
-+ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset withBorderWidth:(CGFloat)width withBorderColor:(UIColor*)color;
+// Ellipse the image.
++ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset borderWidth:(CGFloat)width borderColor:(UIColor*)color;
 
 // Resize the image, and use the current device's pixel scaling factor (for retina resolution).
 + (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)size;
