@@ -19,8 +19,6 @@
 		8E015CD21907BCC40097B9DF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E015CD11907BCC40097B9DF /* XCTest.framework */; };
 		8E015CD31907BCC40097B9DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E015CB21907BCC40097B9DF /* Foundation.framework */; };
 		8E015CD41907BCC40097B9DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E015CB61907BCC40097B9DF /* UIKit.framework */; };
-		8E015CDC1907BCC40097B9DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E015CDA1907BCC40097B9DF /* InfoPlist.strings */; };
-		8E015CDE1907BCC40097B9DF /* SAImageUtilityDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E015CDD1907BCC40097B9DF /* SAImageUtilityDemoTests.m */; };
 		8E015CEA1907BDDC0097B9DF /* SAImageUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E015CE91907BDDC0097B9DF /* SAImageUtility.m */; };
 		8EA45BFB196D2EDF006A7311 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8EA45BFA196D2EDF006A7311 /* image.jpeg */; };
 /* End PBXBuildFile section */
@@ -52,9 +50,6 @@
 		8E015CCA1907BCC40097B9DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8E015CD01907BCC40097B9DF /* SAImageUtilityDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SAImageUtilityDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E015CD11907BCC40097B9DF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		8E015CD91907BCC40097B9DF /* SAImageUtilityDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SAImageUtilityDemoTests-Info.plist"; sourceTree = "<group>"; };
-		8E015CDB1907BCC40097B9DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8E015CDD1907BCC40097B9DF /* SAImageUtilityDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SAImageUtilityDemoTests.m; sourceTree = "<group>"; };
 		8E015CE81907BDDC0097B9DF /* SAImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAImageUtility.h; sourceTree = "<group>"; };
 		8E015CE91907BDDC0097B9DF /* SAImageUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAImageUtility.m; sourceTree = "<group>"; };
 		8EA45BFA196D2EDF006A7311 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
@@ -88,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				8E015CB81907BCC40097B9DF /* SAImageUtilityDemo */,
-				8E015CD71907BCC40097B9DF /* SAImageUtilityDemoTests */,
 				8E015CB11907BCC40097B9DF /* Frameworks */,
 				8E015CB01907BCC40097B9DF /* Products */,
 			);
@@ -137,24 +131,6 @@
 				8E015CBB1907BCC40097B9DF /* InfoPlist.strings */,
 				8E015CBE1907BCC40097B9DF /* main.m */,
 				8E015CC01907BCC40097B9DF /* SAImageUtilityDemo-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8E015CD71907BCC40097B9DF /* SAImageUtilityDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				8E015CDD1907BCC40097B9DF /* SAImageUtilityDemoTests.m */,
-				8E015CD81907BCC40097B9DF /* Supporting Files */,
-			);
-			path = SAImageUtilityDemoTests;
-			sourceTree = "<group>";
-		};
-		8E015CD81907BCC40097B9DF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8E015CD91907BCC40097B9DF /* SAImageUtilityDemoTests-Info.plist */,
-				8E015CDA1907BCC40097B9DF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,7 +231,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E015CDC1907BCC40097B9DF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E015CDE1907BCC40097B9DF /* SAImageUtilityDemoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,14 +280,6 @@
 				8E015CC51907BCC40097B9DF /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8E015CDA1907BCC40097B9DF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8E015CDB1907BCC40097B9DF /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
