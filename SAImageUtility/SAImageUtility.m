@@ -44,17 +44,16 @@
     UIGraphicsBeginImageContext(image.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGRect rect = CGRectMake(inset, inset, image.size.width - inset * 2.0f , image.size.height - inset * 2.0f);
-    
     CGContextAddEllipseInRect(context, rect);
     CGContextClip(context);
     [image drawInRect:rect];
     
-    if (width > 0) {
+    if (width > 0)
+    {
         CGContextSetStrokeColorWithColor(context, color.CGColor);
         CGContextSetLineCap(context,kCGLineCapButt);
         CGContextSetLineWidth(context, width);
         CGContextAddEllipseInRect(context, CGRectMake(inset + width/2, inset +  width/2, image.size.width - width- inset * 2.0f, image.size.height - width - inset * 2.0f));
-        
         CGContextStrokePath(context);
     }
     
@@ -106,6 +105,22 @@
 {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
++ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(int)radius
+{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [image drawAtPoint:CGPointZero];
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextAddArc(context, image.size.width - radius, radius, radius, 0, 2 * M_PI, 0);
+    CGContextDrawPath(context, kCGPathFill);
+    
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img;

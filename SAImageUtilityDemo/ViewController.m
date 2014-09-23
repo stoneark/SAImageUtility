@@ -70,4 +70,11 @@
     [_imgView setImage:img];
     [_imgView setContentMode:UIViewContentModeScaleToFill];
 }
+
+- (IBAction)btnPointClick:(UIButton *)sender
+{
+    UIImage *img = [SAImageUtility addPointToImage:_imgSource pointColor:[UIColor redColor] pointRadius:6];
+    [_imgView setImage:img];
+    [_imgView setContentMode:UIViewContentModeCenter];
+}
 @end

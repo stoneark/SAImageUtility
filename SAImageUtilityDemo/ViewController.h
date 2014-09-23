@@ -16,4 +16,5 @@
 - (IBAction)btnColorClick:(UIButton *)sender;
 - (IBAction)btnCanvasClick:(UIButton *)sender;
 - (IBAction)btnViewClick:(UIButton *)sender;
+- (IBAction)btnPointClick:(UIButton *)sender;
 @end

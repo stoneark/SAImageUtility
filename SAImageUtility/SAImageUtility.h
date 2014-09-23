@@ -53,4 +53,7 @@
 // Capture a view to an image.
 + (UIImage*)imageWithView:(UIView *)view;
 
+// Draw a round point to the right-top corner of an image.
++ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(int)radius;
+
 @end
