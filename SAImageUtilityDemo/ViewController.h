@@ -17,4 +17,5 @@
 - (IBAction)btnCanvasClick:(UIButton *)sender;
 - (IBAction)btnViewClick:(UIButton *)sender;
 - (IBAction)btnPointClick:(UIButton *)sender;
+- (IBAction)btnSerrateClick:(UIButton *)sender;
 @end

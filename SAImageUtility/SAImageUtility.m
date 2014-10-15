@@ -110,7 +110,7 @@
     return img;
 }
 
-+ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(int)radius
++ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(CGFloat)radius
 {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -126,4 +126,107 @@
     return img;
 }
 
++ (UIImage*)serrateImage:(UIImage*)image withDensityLeft:(CGFloat)densityLeft right:(CGFloat)densityRight top:(CGFloat)densityTop bottom:(CGFloat)densityBottom
+{
+    UIGraphicsBeginImageContext(image.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGPoint cursor = CGPointZero;
+    CGContextMoveToPoint(context, 0, 0);
+    
+    // From left-top to left-bottom.
+    if (densityLeft > 0)
+    {
+        CGFloat innerLeftX = sqrt(3) / 2 * densityLeft;
+        while (cursor.y <= image.size.height)
+        {
+            CGContextAddLineToPoint(context, cursor.x, cursor.y);
+            if (cursor.x == 0)
+            {
+                cursor.x = innerLeftX;
+            }
+            else
+            {
+                cursor.x = 0;
+            }
+            cursor.y += densityLeft;
+        }
+    }
+    
+    cursor.x = 0;
+    cursor.y = image.size.height;
+    CGContextAddLineToPoint(context, cursor.x, cursor.y);
+    
+    // From left-bottom to right-bottom.
+    if (densityBottom > 0)
+    {
+        CGFloat innerBottomY = image.size.height - sqrt(3) / 2 * densityBottom;
+        while (cursor.x <= image.size.width)
+        {
+            CGContextAddLineToPoint(context, cursor.x, cursor.y);
+            if (cursor.y == image.size.height)
+            {
+                cursor.y = innerBottomY;
+            }
+            else
+            {
+                cursor.y = image.size.height;
+            }
+            cursor.x += densityBottom;
+        }
+    }
+    
+    cursor.x = image.size.width;
+    cursor.y = image.size.height;
+    CGContextAddLineToPoint(context, cursor.x, cursor.y);
+    
+    // From right-bottom to right-top.
+    if (densityRight > 0)
+    {
+        CGFloat innerRightX = image.size.width - sqrt(3) / 2 * densityRight;
+        while (cursor.y >= 0)
+        {
+            CGContextAddLineToPoint(context, cursor.x, cursor.y);
+            if (cursor.x == image.size.width)
+            {
+                cursor.x = innerRightX;
+            }
+            else
+            {
+                cursor.x = image.size.width;
+            }
+            cursor.y -= densityRight;
+        }
+    }
+    
+    cursor.x = image.size.width;
+    cursor.y = 0;
+    CGContextAddLineToPoint(context, cursor.x, cursor.y);
+    
+    // From right-top to left-top.
+    if (densityTop > 0)
+    {
+        CGFloat innerTopY = sqrt(3) / 2 * densityTop;
+        while (cursor.x >= 0)
+        {
+            CGContextAddLineToPoint(context, cursor.x, cursor.y);
+            if (cursor.y == 0)
+            {
+                cursor.y = innerTopY;
+            }
+            else
+            {
+                cursor.y = 0;
+            }
+            cursor.x -= densityTop;
+        }
+    }
+    
+    CGContextAddLineToPoint(context, 0, 0);
+    CGContextClip(context);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    UIImage *imgSerrated = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return imgSerrated;
+}
 @end

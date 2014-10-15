@@ -54,6 +54,8 @@
 + (UIImage*)imageWithView:(UIView *)view;
 
 // Draw a round point to the right-top corner of an image.
-+ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(int)radius;
++ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(CGFloat)radius;
 
+// Add sawteeth to the boundary of an image.
++ (UIImage*)serrateImage:(UIImage*)image withDensityLeft:(CGFloat)densityLeft right:(CGFloat)densityRight top:(CGFloat)densityTop bottom:(CGFloat)densityBottom;
 @end

@@ -77,4 +77,11 @@
     [_imgView setImage:img];
     [_imgView setContentMode:UIViewContentModeCenter];
 }
+
+- (IBAction)btnSerrateClick:(UIButton *)sender
+{
+    UIImage *img = [SAImageUtility serrateImage:_imgSource withDensityLeft:5 right:5 top:0 bottom:0];
+    [_imgView setImage:img];
+    [_imgView setContentMode:UIViewContentModeCenter];
+}
 @end

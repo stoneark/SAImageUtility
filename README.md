@@ -43,6 +43,14 @@ SAImageUtility offers several useful and simple methods about UIImage.
 + (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(int)radius;
 ```
 
+- Add sawteeth to the boundary of an image.
+
+```
++ (UIImage*)serrateImage:(UIImage*)image withDensityLeft:(CGFloat)densityLeft right:(CGFloat)densityRight top:(CGFloat)densityTop bottom:(CGFloat)densityBottom;
+```
+
+For detail, check the demo project.
+
 ## License
 
 MIT License
