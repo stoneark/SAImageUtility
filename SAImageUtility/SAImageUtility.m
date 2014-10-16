@@ -41,7 +41,7 @@
 
 + (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset borderWidth:(CGFloat)width borderColor:(UIColor*)color
 {
-    UIGraphicsBeginImageContext(image.size);
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGRect rect = CGRectMake(inset, inset, image.size.width - inset * 2.0f , image.size.height - inset * 2.0f);
     CGContextAddEllipseInRect(context, rect);
@@ -128,7 +128,7 @@
 
 + (UIImage*)serrateImage:(UIImage*)image withDensityLeft:(CGFloat)densityLeft right:(CGFloat)densityRight top:(CGFloat)densityTop bottom:(CGFloat)densityBottom
 {
-    UIGraphicsBeginImageContext(image.size);
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGPoint cursor = CGPointZero;
