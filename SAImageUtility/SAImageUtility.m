@@ -29,18 +29,15 @@
 
 @implementation SAImageUtility
 
-+ (UIImage*)ellipseImage:(UIImage*)image
-{
++ (UIImage*)ellipseImage:(UIImage*)image {
     return [self ellipseImage:image withInset:0];
 }
 
-+ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset
-{
++ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset {
     return [self ellipseImage:image withInset:inset borderWidth:0 borderColor:[UIColor clearColor]];
 }
 
-+ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset borderWidth:(CGFloat)width borderColor:(UIColor*)color
-{
++ (UIImage*)ellipseImage:(UIImage*)image withInset:(CGFloat)inset borderWidth:(CGFloat)width borderColor:(UIColor*)color {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGRect rect = CGRectMake(inset, inset, image.size.width - inset * 2.0f , image.size.height - inset * 2.0f);
@@ -48,8 +45,7 @@
     CGContextClip(context);
     [image drawInRect:rect];
     
-    if (width > 0)
-    {
+    if (width > 0) {
         CGContextSetStrokeColorWithColor(context, color.CGColor);
         CGContextSetLineCap(context,kCGLineCapButt);
         CGContextSetLineWidth(context, width);
@@ -62,8 +58,7 @@
     return imgEllipsed;
 }
 
-+ (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)size
-{
++ (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)size {
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIImage *imgScaled = UIGraphicsGetImageFromCurrentImageContext();
@@ -71,8 +66,7 @@
     return imgScaled;
 }
 
-+ (UIImage*)scaleImage:(UIImage*)image toExactPixelSize:(CGSize)size
-{
++ (UIImage*)scaleImage:(UIImage*)image toExactPixelSize:(CGSize)size {
     UIGraphicsBeginImageContextWithOptions(size, NO, 1.0);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIImage *imgScaled = UIGraphicsGetImageFromCurrentImageContext();
@@ -80,8 +74,22 @@
     return imgScaled;
 }
 
-+ (UIImage*)imageWithColor:(UIColor*)color
-{
++ (UIImage *)tintImage:(UIImage*)image withColor:(UIColor*)color {
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGContextClipToMask(context, rect, image.CGImage);
+    [color setFill];
+    CGContextFillRect(context, rect);
+    UIImage *imgTinted = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return imgTinted;
+}
+
++ (UIImage*)imageWithColor:(UIColor*)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -92,8 +100,7 @@
     return img;
 }
 
-+ (UIImage*)imageWithImage:(UIImage *)image changeCanvasSize:(CGSize)newSize
-{
++ (UIImage*)imageWithImage:(UIImage *)image changeCanvasSize:(CGSize)newSize {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawAtPoint:CGPointMake((newSize.width-image.size.width)/2, (newSize.height-image.size.height)/2)];
     UIImage *imgReCanvas = UIGraphicsGetImageFromCurrentImageContext();
@@ -101,8 +108,7 @@
     return imgReCanvas;
 }
 
-+ (UIImage*)imageWithView:(UIView *)view
-{
++ (UIImage*)imageWithView:(UIView *)view {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
@@ -110,8 +116,7 @@
     return img;
 }
 
-+ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(CGFloat)radius
-{
++ (UIImage*)addPointToImage:(UIImage*)image pointColor:(UIColor*)color pointRadius:(CGFloat)radius {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -126,8 +131,7 @@
     return img;
 }
 
-+ (UIImage*)serrateImage:(UIImage*)image withDensityLeft:(CGFloat)densityLeft right:(CGFloat)densityRight top:(CGFloat)densityTop bottom:(CGFloat)densityBottom
-{
++ (UIImage*)serrateImage:(UIImage*)image withDensityLeft:(CGFloat)densityLeft right:(CGFloat)densityRight top:(CGFloat)densityTop bottom:(CGFloat)densityBottom {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -135,18 +139,13 @@
     CGContextMoveToPoint(context, 0, 0);
     
     // From left-top to left-bottom.
-    if (densityLeft > 0)
-    {
+    if (densityLeft > 0) {
         CGFloat innerLeftX = sqrt(3) / 2 * densityLeft;
-        while (cursor.y <= image.size.height)
-        {
+        while (cursor.y <= image.size.height) {
             CGContextAddLineToPoint(context, cursor.x, cursor.y);
-            if (cursor.x == 0)
-            {
+            if (cursor.x == 0) {
                 cursor.x = innerLeftX;
-            }
-            else
-            {
+            } else {
                 cursor.x = 0;
             }
             cursor.y += densityLeft;
@@ -158,18 +157,13 @@
     CGContextAddLineToPoint(context, cursor.x, cursor.y);
     
     // From left-bottom to right-bottom.
-    if (densityBottom > 0)
-    {
+    if (densityBottom > 0) {
         CGFloat innerBottomY = image.size.height - sqrt(3) / 2 * densityBottom;
-        while (cursor.x <= image.size.width)
-        {
+        while (cursor.x <= image.size.width) {
             CGContextAddLineToPoint(context, cursor.x, cursor.y);
-            if (cursor.y == image.size.height)
-            {
+            if (cursor.y == image.size.height) {
                 cursor.y = innerBottomY;
-            }
-            else
-            {
+            } else {
                 cursor.y = image.size.height;
             }
             cursor.x += densityBottom;
@@ -181,18 +175,13 @@
     CGContextAddLineToPoint(context, cursor.x, cursor.y);
     
     // From right-bottom to right-top.
-    if (densityRight > 0)
-    {
+    if (densityRight > 0) {
         CGFloat innerRightX = image.size.width - sqrt(3) / 2 * densityRight;
-        while (cursor.y >= 0)
-        {
+        while (cursor.y >= 0) {
             CGContextAddLineToPoint(context, cursor.x, cursor.y);
-            if (cursor.x == image.size.width)
-            {
+            if (cursor.x == image.size.width) {
                 cursor.x = innerRightX;
-            }
-            else
-            {
+            } else {
                 cursor.x = image.size.width;
             }
             cursor.y -= densityRight;
@@ -204,18 +193,13 @@
     CGContextAddLineToPoint(context, cursor.x, cursor.y);
     
     // From right-top to left-top.
-    if (densityTop > 0)
-    {
+    if (densityTop > 0) {
         CGFloat innerTopY = sqrt(3) / 2 * densityTop;
-        while (cursor.x >= 0)
-        {
+        while (cursor.x >= 0) {
             CGContextAddLineToPoint(context, cursor.x, cursor.y);
-            if (cursor.y == 0)
-            {
+            if (cursor.y == 0) {
                 cursor.y = innerTopY;
-            }
-            else
-            {
+            } else {
                 cursor.y = 0;
             }
             cursor.x -= densityTop;

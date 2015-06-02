@@ -19,6 +19,12 @@ SAImageUtility offers several useful and simple methods about UIImage.
 + (UIImage*)scaleImage:(UIImage*)image toExactPixelSize:(CGSize)size;
 ```
 
+- Tint an image with a particular color.
+
+```
++ (UIImage *)tintImage:(UIImage*)image withColor:(UIColor*)color;
+```
+
 - Change canvas size of an image.
 
 ```

@@ -26,6 +26,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface SAImageUtility : NSObject
 
@@ -43,6 +44,9 @@
 
 // Resize the image with an exact pixel size.
 + (UIImage*)scaleImage:(UIImage*)image toExactPixelSize:(CGSize)size;
+
+// Tint the image with a particular color.
++ (UIImage *)tintImage:(UIImage*)image withColor:(UIColor*)color;
 
 // Use a kind of color to build an UIImage.
 + (UIImage*)imageWithColor:(UIColor*)color;
